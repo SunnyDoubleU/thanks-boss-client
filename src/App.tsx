@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import styled, { ThemeProvider } from "styled-components";
+import { defaultTheme, darkTheme } from "./styles/themes";
+import Home from "./pages/home";
+import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import GlobalStyle from "./styles/globalStyle";
 
-function App() {
+const SBackground = styled.div`
+  background: ${(props) => props.theme.colors.background};
+`;
+
+const SHeader = styled.div`
+  color: ${(props) => props.theme.colors.text};
+  font-size: 30px;
+`;
+
+export type ThemeType = typeof defaultTheme;
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <GlobalStyle />
+      <Router>
+        <SHeader>Thanks Boss</SHeader>
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
