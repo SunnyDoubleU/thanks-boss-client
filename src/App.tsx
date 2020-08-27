@@ -5,6 +5,7 @@ import { defaultTheme, darkTheme } from "./styles/themes";
 import Home from "./pages/home";
 import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useState } from "react";
 import GlobalStyle from "./styles/globalStyle";
 
 const SBackground = styled.div`
@@ -16,12 +17,32 @@ const SHeader = styled.div`
   font-size: 30px;
 `;
 
+const SButton = styled.div<{ theme: string }>`
+  /* padding: 10; */
+  border-radius: 50px;
+  background: ${(props) => (props.theme === "true" ? "#cdcdcd" : "#444444")};
+  color: ${(props) => (props.theme === "true" ? "#444444" : "#cdcdcd")};
+`;
+
 export type ThemeType = typeof defaultTheme;
 
 const App: React.FC = () => {
+  const [theme, setTheme] = useState(defaultTheme);
+  const [isDefaultTheme, setIsDefaultTheme] = useState(true);
+  const toggleHandler = () => {
+    setIsDefaultTheme(!isDefaultTheme);
+    if (isDefaultTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(defaultTheme);
+    }
+  };
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <SButton theme={isDefaultTheme.toString()} onClick={toggleHandler}>
+        Change Theme
+      </SButton>
       <Router>
         <SHeader>Thanks Boss</SHeader>
         <Switch>
