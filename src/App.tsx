@@ -6,6 +6,8 @@ import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useState } from "react";
 import GlobalStyle from "./styles/globalStyle";
+import ThemeButton from "./components/common/themeButton/index";
+import TempNavigation from "./components/common/navigation/index";
 
 
 const SHeader = styled.div`
@@ -13,12 +15,6 @@ const SHeader = styled.div`
   font-size: 30px;
 `;
 
-const SButton = styled.div`
-  width: 300px;
-  border-radius: 50px;
-  background: ${(props) => (props.theme.colors.button.changeModeButton.background)};
-  color: ${(props) => (props.theme.colors.button.changeModeButton.text)};
-`;
 
 export type ThemeType = typeof defaultTheme;
 
@@ -36,9 +32,8 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <SButton onClick={toggleHandler}>
-        Change Theme
-      </SButton>
+      <ThemeButton toggleHandler={toggleHandler} />
+      <TempNavigation />
       <Router>
         <SHeader>Thanks Boss</SHeader>
         <Switch>
