@@ -11,6 +11,13 @@ interface IColors {
   scrollbarBG: string;
   scrollbarFG: string;
   accent: string;
+  button: {
+    changeModeButton: {
+      background: string;
+      text: string;
+    }
+  }
+
 }
 
 export const defaultTheme: ITheme = {
@@ -21,6 +28,12 @@ export const defaultTheme: ITheme = {
     scrollbarBG: "#999999",
     scrollbarFG: "#cdcdcd",
     accent: "teal",
+    button: {
+      changeModeButton: {
+        background: "#cdcdcd",
+        text: "#444444",
+      }
+    }
   },
 };
 
@@ -32,5 +45,11 @@ export const darkTheme: ITheme = {
     scrollbarBG: "#999999",
     scrollbarFG: "#cdcdcd",
     accent: "teal",
+    button: {
+      changeModeButton: {
+        background: "#444444",
+        text: "#cdcdcd",
+      }
+    }
   },
 };

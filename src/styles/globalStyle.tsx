@@ -1,16 +1,16 @@
 import { createGlobalStyle } from "styled-components/macro";
 
 interface ITheme {
-  colors: IColors;
+    colors: IColors;
 }
 
 interface IColors {
-  background: string;
-  text: string;
-  hover: string;
-  scrollbarBG: string;
-  scrollbarFG: string;
-  accent: string;
+    background: string;
+    text: string;
+    hover: string;
+    scrollbarBG: string;
+    scrollbarFG: string;
+    accent: string;
 }
 
 const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
