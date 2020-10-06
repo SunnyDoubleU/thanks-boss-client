@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { IEvent } from '../../types'
+import { IEvent, IUser } from '../../types'
 interface EventProps {
     events?: IEvent[]
+}
+
+interface ParticipantProps {
+    participants: IUser[]
 }
 const SMainContainer = styled.div`
     margin: 20px;
@@ -34,6 +38,7 @@ const SEventContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    background: ${(props) => props.theme.colors.primary};
 `
 
 const SEventImage = styled.div`
@@ -56,7 +61,34 @@ const SEventTitle = styled.div`
 const SParticipantsContainer = styled.div`
     font-size: 11px;
 `
-const SParticipant = styled.span``
+const SParticipant = styled.span`
+    margin-left: 2px;
+`
+
+const Participants: React.FC<ParticipantProps> = ({ participants }) => {
+    const getParticipants = (length: number, pIndex: number, participant: IUser) => {
+        // console.log('length', length)
+        // console.log(pIndex)
+        if (pIndex === length) {
+            return (
+                <SParticipant>
+                    {`&`} {participant.username}
+                </SParticipant>
+            )
+        } else {
+            return <SParticipant>{participant.username}</SParticipant>
+        }
+    }
+
+    return (
+        <>
+            {participants.map((participant, index) =>
+                // <SParticipant>{participant.username}</SParticipant>
+                getParticipants(participants.length, index + 1, participant),
+            )}
+        </>
+    )
+}
 
 const AllEvents: React.FC<EventProps> = ({ events }) => {
     console.log(events)
@@ -75,11 +107,7 @@ const AllEvents: React.FC<EventProps> = ({ events }) => {
                                     <SParticipantsContainer>
                                         with
                                         {event?.participants !== undefined && (
-                                            <>
-                                                {event.participants.map((participant, index) => (
-                                                    <></>
-                                                ))}
-                                            </>
+                                            <Participants participants={event.participants} />
                                         )}
                                     </SParticipantsContainer>
                                 </SEventRightContainer>

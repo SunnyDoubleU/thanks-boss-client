@@ -1,13 +1,13 @@
 export interface IEvent {
     title?: string
-    participants?: IUser[] | string[]
+    participants?: IUser[]
     transaction?: ITransaction[] | string[]
 }
 
 export interface ITransaction {
     title?: string
     payer?: string
-    participants?: string
+    participants?: IUser[]
     cost?: number
     currency?: string
     event?: string

@@ -18,9 +18,9 @@ const Events = () => {
             case 'newEvent':
                 return <NewEvent />
             case 'all':
-                return <AllEvents events={events.events} />
+                return <AllEvents events={events} />
             default:
-                return <AllEvents events={events.events} />
+                return <AllEvents events={events} />
         }
     }
     const fetchData = async () => {
@@ -34,7 +34,7 @@ const Events = () => {
     useEffect(() => {
         fetchData()
     }, [])
-    return <>{getEventPage()}</>
+    return <>{events.length > 0 && getEventPage()}</>
 }
 
 export default Events
