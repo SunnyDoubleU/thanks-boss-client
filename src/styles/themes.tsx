@@ -16,6 +16,7 @@ interface IColors {
         secondary: string
         tertiary: string
         quaternary: string
+        h1: string
     }
     error: string
     border: string
@@ -37,7 +38,7 @@ export const defaultTheme: ITheme = {
         background: {
             primary: '#fff',
             secondary: '#fcf7f7',
-            tertiary: '#FF7262',
+            tertiary: '#FF5454',
             quaternary: '#F7C3BC',
         },
         text: {
@@ -45,13 +46,14 @@ export const defaultTheme: ITheme = {
             secondary: '#ffffff',
             tertiary: '#999999',
             quaternary: '#F7C3BC',
+            h1: '#444444',
         },
-        error: '#FF7262',
+        error: '#FF5454',
         border: '#ededed',
         hover: '#999999',
         scrollbarBG: '#999999',
         scrollbarFG: '#cdcdcd',
-        accent: 'teal',
+        accent: '#71D1EB',
         button: {
             changeModeButton: {
                 background: '#cdcdcd',
@@ -75,13 +77,14 @@ export const darkTheme: ITheme = {
             secondary: '#cdcdcd',
             tertiary: '#999999',
             quaternary: '#ffffff',
+            h1: '#ffffff',
         },
         error: 'red',
-        border: '#cdcdcd',
+        border: 'transparent',
         hover: '#999999',
         scrollbarBG: '#999999',
         scrollbarFG: '#cdcdcd',
-        accent: 'teal',
+        accent: '#71D1EB',
         button: {
             changeModeButton: {
                 background: '#444444',
