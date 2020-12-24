@@ -14,5 +14,8 @@ export interface ITransaction {
 }
 
 export interface IUser {
-    username?: string
+    firstName: string
+    surname: string
+    email: string
+    password: string
 }

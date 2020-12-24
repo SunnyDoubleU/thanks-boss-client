@@ -72,11 +72,11 @@ const Participants: React.FC<ParticipantProps> = ({ participants }) => {
         if (pIndex === length) {
             return (
                 <SParticipant>
-                    {`&`} {participant.username}
+                    {`&`} {participant.firstName}
                 </SParticipant>
             )
         } else {
-            return <SParticipant>{participant.username}</SParticipant>
+            return <SParticipant>{participant.firstName}</SParticipant>
         }
     }
 

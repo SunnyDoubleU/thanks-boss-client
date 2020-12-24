@@ -2,22 +2,34 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { apiAuthentication } from '../../../api/apiAuthentication'
 import { useForm } from 'react-hook-form'
+import { IUser } from '../../../types'
 interface IPasswordError {
     error: string
 }
+
 const SMainContainer = styled.div`
-    background: ${(props) => props.theme.colors.background.secondary};
+    background: ${(props) => props.theme.colors.background.primary};
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 15px;
+    padding: 20px;
+`
+const SHeader = styled.div`
+    font-size: 32px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    color: ${(props) => props.theme.colors.text.h1};
+    margin-bottom: 10px;
 `
 const SButton = styled.button`
     background: ${(props) =>
-        `linear-gradient(90deg, ${props.theme.colors.background.tertiary} 26%, ${props.theme.colors.background.quaternary} 100%)`};
+        `linear-gradient(50deg, ${props.theme.colors.background.tertiary} 26%, ${props.theme.colors.background.quaternary} 100%)`};
     padding: 10px;
     border: none;
-    border-radius: 25px;
+    border-radius: 8px;
     color: ${(props) => props.theme.colors.text.secondary};
 `
 const SErrorContainer = styled.div`
@@ -26,14 +38,22 @@ const SErrorContainer = styled.div`
 const SForm = styled.form`
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
 `
 const SInput = styled.input<{ hasError: boolean }>`
-    border: 1px solid ${(props) => (props.hasError ? props.theme.colors.error : 'transparent')};
-    border-radius: 25px;
+    border: 1px solid ${(props) => (props.hasError ? props.theme.colors.error : props.theme.colors.border)};
+    border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
-    box-shadow: 3px 3px 3px 0px ${(props) => props.theme.colors.boxShadow};
+    /* box-shadow: 3px 3px 3px 0px ${(props) => props.theme.colors.boxShadow}; */
+`
+const SLogInContainer = styled.div`
+    margin-top: 5px;
+    color: ${(props) => props.theme.colors.text.primary};
+`
+const SToLogIn = styled.span`
+    color: ${(props) => props.theme.colors.accent};
+    text-decoration: underline;
 `
 
 const SignUpPage: React.FC = () => {
@@ -41,34 +61,53 @@ const SignUpPage: React.FC = () => {
     const password = useRef({})
     password.current = watch('password', '')
     const [error, setError] = useState('')
-    const [username, setUsername] = useState('')
-    const isValidForm = () => {
-        //todo: add in more fields for form
-        // return username.length > 0 && passwordAuth()
-    }
 
-    const signUp = async (email: string, password: string) => {
+    const signUp = async (user: IUser) => {
         try {
-            const response = await apiAuthentication.createUser(email, password)
+            const response = await apiAuthentication.createUser(user)
             console.log(response)
         } catch (err) {
             setError(err)
+            console.log(err)
         }
     }
-    // const inputUsername = (e: ChangeEvent<HTMLInputElement>): void => {
-    //     setUsername(e.target.value)
-    // }
+
     const onSubmit = async (data: any) => {
-        signUp(data.email, data.password)
-        alert(JSON.stringify(data))
+        console.log(data)
+        const userInfo = {
+            firstName: data.firstName,
+            surname: data.surname,
+            email: data.email,
+            password: data.password,
+        }
+        signUp(userInfo)
     }
     return (
         <SMainContainer>
+            <SHeader>Create your account</SHeader>
             <SForm onSubmit={(e) => e.preventDefault()}>
                 <SInput
                     type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    ref={register({
+                        required: 'First name is reqired',
+                    })}
+                    hasError={errors.firstName}
+                />
+                <SInput
+                    type="text"
+                    name="surname"
+                    placeholder="Surname"
+                    ref={register({
+                        required: 'Surname is reqired',
+                    })}
+                    hasError={errors.lastName}
+                />
+                <SInput
+                    type="text"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     ref={register({
                         required: 'Email is reqired',
                         pattern: {
@@ -82,7 +121,7 @@ const SignUpPage: React.FC = () => {
                 <SInput
                     type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     ref={register({
                         required: 'You must specify a password',
                         minLength: {
@@ -96,7 +135,7 @@ const SignUpPage: React.FC = () => {
                 <SInput
                     type="password"
                     name="password_repeat"
-                    placeholder="confirm password"
+                    placeholder="Confirm password"
                     ref={register({
                         validate: (value: any) => value === password.current || 'The passwords do not match',
                     })}
@@ -109,10 +148,13 @@ const SignUpPage: React.FC = () => {
                 </SErrorContainer>
 
                 <SButton type="submit" onClick={handleSubmit(onSubmit)}>
-                    Create User
+                    Sign up
                 </SButton>
                 {/* <input type="submit" onClick={handleSubmit(onSubmit)} /> */}
             </SForm>
+            <SLogInContainer>
+                Already have an account? <SToLogIn>Sign In</SToLogIn>
+            </SLogInContainer>
         </SMainContainer>
     )
 }
