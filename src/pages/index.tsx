@@ -9,4 +9,8 @@ export default {
         path: '/signup',
         component: lazy(() => import(`./authentication/signup`)),
     },
+    logIn: {
+        path: '/login',
+        component: lazy(() => import(`./authentication/login`)),
+    },
 }

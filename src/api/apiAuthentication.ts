@@ -11,4 +11,12 @@ export const apiAuthentication = {
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
         })
     },
+    loginUser: (user: IUser) => {
+        return axios({
+            method: 'POST',
+            url: 'http://localhost:8080/api/loginUser',
+            data: qs.stringify(user),
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        })
+    },
 }

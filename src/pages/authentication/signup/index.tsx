@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { apiAuthentication } from '../../../api/apiAuthentication'
 import { useForm } from 'react-hook-form'
 import { IUser } from '../../../types'
+import { Link } from 'react-router-dom'
 interface IPasswordError {
     error: string
 }
@@ -45,13 +46,13 @@ const SInput = styled.input<{ hasError: boolean }>`
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
-    /* box-shadow: 3px 3px 3px 0px ${(props) => props.theme.colors.boxShadow}; */
 `
 const SLogInContainer = styled.div`
     margin-top: 5px;
     color: ${(props) => props.theme.colors.text.primary};
 `
-const SToLogIn = styled.span`
+const SToLogIn = styled.span``
+const SLogInLink = styled(Link)`
     color: ${(props) => props.theme.colors.accent};
     text-decoration: underline;
 `
@@ -73,7 +74,6 @@ const SignUpPage: React.FC = () => {
     }
 
     const onSubmit = async (data: any) => {
-        console.log(data)
         const userInfo = {
             firstName: data.firstName,
             surname: data.surname,
@@ -150,10 +150,12 @@ const SignUpPage: React.FC = () => {
                 <SButton type="submit" onClick={handleSubmit(onSubmit)}>
                     Sign up
                 </SButton>
-                {/* <input type="submit" onClick={handleSubmit(onSubmit)} /> */}
             </SForm>
             <SLogInContainer>
-                Already have an account? <SToLogIn>Sign In</SToLogIn>
+                Already have an account?{' '}
+                <SToLogIn>
+                    <SLogInLink to={`/login`}>Sign In</SLogInLink>
+                </SToLogIn>
             </SLogInContainer>
         </SMainContainer>
     )
