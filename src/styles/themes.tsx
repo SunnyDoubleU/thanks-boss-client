@@ -27,7 +27,7 @@ interface IColors {
     button: {
         changeModeButton: {
             background: string
-            text: string
+            button: string
         }
     }
     boxShadow: string
@@ -57,7 +57,7 @@ export const defaultTheme: ITheme = {
         button: {
             changeModeButton: {
                 background: '#cdcdcd',
-                text: '#444444',
+                button: '#FFFFFF',
             },
         },
         boxShadow: '#F7C3BC',
@@ -87,8 +87,8 @@ export const darkTheme: ITheme = {
         accent: '#71D1EB',
         button: {
             changeModeButton: {
-                background: '#444444',
-                text: '#cdcdcd',
+                background: '#cdcdcd',
+                button: '#FFFFFF',
             },
         },
         boxShadow: '#cdcdcd',

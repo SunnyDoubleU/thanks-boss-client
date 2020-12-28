@@ -33,7 +33,7 @@ const App: React.FC = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <ThemeButton toggleHandler={toggleHandler} />
+            <ThemeButton toggleHandler={toggleHandler} isDefaultTheme={isDefaultTheme} />
             <Router>
                 {/* <SHeader>Thanks Boss</SHeader> */}
                 <Suspense fallback={<AppLoading />}>
