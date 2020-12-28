@@ -59,6 +59,7 @@ const LoginPage: React.FC = () => {
     const { register, errors, handleSubmit } = useForm({})
     const [error, setError] = useState('')
     const logIn = async (user: IUser) => {
+        console.log('testing testing')
         try {
             const response = await apiAuthentication.loginUser(user)
             console.log(response)
