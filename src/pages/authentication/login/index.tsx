@@ -4,6 +4,8 @@ import { apiAuthentication } from '../../../api/apiAuthentication'
 import { useForm } from 'react-hook-form'
 import { IUser } from '../../../types'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { setUser } from '../../../functions'
 
 const SMainContainer = styled.div`
     background: ${(props) => props.theme.colors.background.primary};
@@ -58,11 +60,12 @@ const SSignUpLink = styled(Link)`
 const LoginPage: React.FC = () => {
     const { register, errors, handleSubmit } = useForm({})
     const [error, setError] = useState('')
+    const history = useHistory()
     const logIn = async (user: IUser) => {
-        console.log('testing testing')
         try {
             const response = await apiAuthentication.loginUser(user)
-            console.log(response)
+            setUser(response.data)
+            history.push('/')
         } catch (err) {
             setError(err)
             console.log('login error', err)

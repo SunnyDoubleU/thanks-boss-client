@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { logoutUser } from '../../../../src/functions'
 
 const SMainContainer = styled.div`
     position: fixed;
@@ -17,6 +18,10 @@ const SLink = styled(NavLink)`
     color: white;
     margin-left: 5px;
 `
+const SLogOut = styled.div`
+    color: white;
+    margin-left: 5px;
+`
 
 const Navigation: React.FC = () => {
     return (
@@ -24,6 +29,8 @@ const Navigation: React.FC = () => {
             <SLink to={'/'}>Home</SLink>
             <SLink to={'/events'}>Events</SLink>
             <SLink to={'/events/all'}>All Events</SLink>
+            <SLink to={'/login'}>Log in</SLink>
+            <SLogOut onClick={() => logoutUser()}>Log out</SLogOut>
         </SMainContainer>
     )
 }
