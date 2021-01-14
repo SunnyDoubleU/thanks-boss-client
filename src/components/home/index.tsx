@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from "styled-components"
+import React from 'react'
 
-interface IHomeProps { 
-
-}
+interface IHomeProps {}
 
 const HomeComponent: React.FC = () => {
     return <></>
 }
+
+export default HomeComponent

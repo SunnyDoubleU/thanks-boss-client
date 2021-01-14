@@ -4,6 +4,8 @@ import { apiAuthentication } from '../../../api/apiAuthentication'
 import { useForm } from 'react-hook-form'
 import { IUser } from '../../../types'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { setUser } from '../../../functions'
 interface IPasswordError {
     error: string
 }
@@ -62,11 +64,13 @@ const SignUpPage: React.FC = () => {
     const password = useRef({})
     password.current = watch('password', '')
     const [error, setError] = useState('')
+    const history = useHistory()
 
     const signUp = async (user: IUser) => {
         try {
             const response = await apiAuthentication.createUser(user)
-            console.log(response)
+            setUser(response.data)
+            history.push('/')
         } catch (err) {
             setError(err)
             console.log(err)

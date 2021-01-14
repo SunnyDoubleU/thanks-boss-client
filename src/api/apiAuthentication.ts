@@ -19,4 +19,7 @@ export const apiAuthentication = {
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
         })
     },
+    logoutUser: () => {
+        return axios.get(`http://localhost:8080/api/logoutUser`)
+    },
 }
